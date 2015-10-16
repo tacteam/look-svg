@@ -1,5 +1,6 @@
-angular.module('module.tac.svg', [])
+'use strict'
 
+angular.module('module.tac.svg', [])
 
 .directive('inlineSvg', [
   ()->

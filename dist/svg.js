@@ -1,4 +1,5 @@
 (function() {
+  'use strict';
   angular.module('module.tac.svg', []).directive('inlineSvg', [
     function() {
       return {
