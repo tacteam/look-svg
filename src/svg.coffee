@@ -7,12 +7,12 @@ angular.module('module.tac.svg', [])
     restrict: 'A'
     scope: inlineSvg: '@'
     link: (scope, element, attrs) ->
-      scope.$watch('inlineSvg', () ->
+      watcher = ->
         if scope.inlineSvg
           $.get scope.inlineSvg, (svgDocument) ->
             svg = $(svgDocument).find('svg')
             element.append svg
-      , true)
+      scope.$watch('inlineSvg', watcher, true)
 ])
 
 .directive('inlineSvgModel', [
@@ -22,13 +22,12 @@ angular.module('module.tac.svg', [])
     scope: inlineSvgModel: '@'
     link: (scope, element, attrs) ->
       svgvalue = null
-      scope.$watch('inlineSvgModel', () ->
+      watcher = ->
         if scope.inlineSvgModel and scope.inlineSvgModel isnt svgvalue
           svgvalue = $interpolate(scope.inlineSvgModel)(scope)
           $.get svgvalue, (svgDocument) ->
             svg = $(svgDocument).find('svg')
             element.append svg
-      , true)
-        
-
+      scope.$watch('inlineSvgModel', watcher , true)
 ])
+

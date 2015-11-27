@@ -8,7 +8,8 @@
           inlineSvg: '@'
         },
         link: function(scope, element, attrs) {
-          return scope.$watch('inlineSvg', function() {
+          var watcher;
+          watcher = function() {
             if (scope.inlineSvg) {
               return $.get(scope.inlineSvg, function(svgDocument) {
                 var svg;
@@ -16,7 +17,8 @@
                 return element.append(svg);
               });
             }
-          }, true);
+          };
+          return scope.$watch('inlineSvg', watcher, true);
         }
       };
     }
@@ -28,9 +30,9 @@
           inlineSvgModel: '@'
         },
         link: function(scope, element, attrs) {
-          var svgvalue;
+          var svgvalue, watcher;
           svgvalue = null;
-          return scope.$watch('inlineSvgModel', function() {
+          watcher = function() {
             if (scope.inlineSvgModel && scope.inlineSvgModel !== svgvalue) {
               svgvalue = $interpolate(scope.inlineSvgModel)(scope);
               return $.get(svgvalue, function(svgDocument) {
@@ -39,7 +41,8 @@
                 return element.append(svg);
               });
             }
-          }, true);
+          };
+          return scope.$watch('inlineSvgModel', watcher, true);
         }
       };
     }
